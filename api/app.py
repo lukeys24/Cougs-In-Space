@@ -9,39 +9,34 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlalchemy-demo.db'
 
 db = sqlalchemy.SQLAlchemy(app)
-
-class Smile(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	space = db.Column(db.String(128))
-	title = db.Column(db.String(64))
-	story = db.Column(db.String(2048))
-	happiness_level = db.Column(db.Integer)
-	like_count = db.Column(db.Integer, default=0)
-	created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-	updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-
 base_url = '/api/'
+
+class Post(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	team = db.Column(db.String(128))
+	title = db.Column(db.String(64))
+	update = db.Column(db.String(2048))
+	created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+class User(db.Model):
+	name = db.Column(db.String(50), primary_key=True)
+	password = db.Column(db.String(50))
 
 # index
 # loads all smiles given a space, count parameter and order_by parameter 
 # if the count param is specified and doesn't equal all limit by the count
 # if the order_by param is specified order by param otherwise load by updated_at desc
 # return JSON
-@app.route(base_url + 'smiles', methods=["GET"])
+@app.route(base_url + 'posts', methods=["GET"])
 def index():
     count = request.args.get('count', None)
     order_by = request.args.get('order_by', None)
-    space = request.args.get('space', None) 
+    team = request.args.get('team', None) 
 
-    if space is None:
-        return "Must provide space", 500
+    if team is None:
+        return "Must provide team", 500
     
-    query = Smile.query.filter_by(space=space).order_by(order_by).limit(count).all() # store the results of your query here 
-	
-    # TODO 2: set the column which you are ordering on (if it exists)
-	
-    # TODO 3: limit the number of posts based on the count (if it exists)
-
+    query = Post.query.filter_by(team=team).order_by(order_by).limit(count).all() # store the results of your query here 
     
     result = []
     for row in query:
@@ -49,7 +44,7 @@ def index():
             row_to_obj(row) # you must call this function to properly format 
         )
 
-    return jsonify({"status": 1, "smiles": result})
+    return jsonify({"status": 1, "posts": result})
 
 
 # show
@@ -115,13 +110,10 @@ def post_like(id):
 def row_to_obj(row):
     row = {
             "id": row.id,
-            "space": row.space,
+            "team": row.team,
             "title": row.title,
-            "story": row.story,
-            "happiness_level": row.happiness_level,
-            "like_count": row.like_count,
+            "update": row.update,
             "created_at": row.created_at,
-            "updated_at": row.updated_at
         }
 
     return row
