@@ -9,3 +9,7 @@ body {
 .container {
 	float: left;
 }
+
+.remove_whitespace {
+	overflow: hidden;
+}
