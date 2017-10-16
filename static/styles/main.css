@@ -1,5 +1,6 @@
 .jumbotron {
-	background-color: #809fff;
+	background-color: #ffffff;
+	margin: 0px;
 }
 
 body {
@@ -8,6 +9,10 @@ body {
 
 .container {
 	float: left;
+}
+
+h1 {
+	display: inline-block;
 }
 
 .remove_whitespace {
