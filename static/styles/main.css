@@ -1,5 +1,5 @@
 .jumbotron {
-	background-color: #ffffff;
+	background-color: #809fff;
 	margin: 0px;
 }
 
@@ -16,5 +16,7 @@ h1 {
 }
 
 .remove_whitespace {
+	display: inline-block;
+	opacity: .7;
 	overflow: hidden;
 }
