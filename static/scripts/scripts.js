@@ -180,7 +180,7 @@ var Smile = (function() {
 
         // FINISH ME (Task 4): add a handler to the 'Share a smile...' button to
         //                     show the 'form' and hide to button
-		create.on('click', '.share-smile', function (e) {
+		index.on('click', '.share-smile', function (e) {
             e.preventDefault (); // Tell the browser to skip its default click action
 			smiles.find('.smile').hide();
 			create.find('.share-smile').hide();
