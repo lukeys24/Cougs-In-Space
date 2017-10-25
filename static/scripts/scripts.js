@@ -163,9 +163,20 @@ var Smile = (function() {
      * Add event handlers for submitting the create form.
      * @return {None}
      */
-    var attachTeamsPageHandler = function(e) {
-        // First, hide the form, initially 
-        create.find('form').hide();
+    var attachHomePageHandler = function(e) {
+        // First, hide the forms and page content initially
+		index.find('HomePageContent').show();      //HOMEPAGE HANDLER
+		index.find('TeamsCreateForm').hide();
+		index.find('DonorsPageContent').hide();
+		index.find('GetInvolvedPageContent').hide();
+		index.find('DonatePageContent').hide();
+		index.find('K-12PageContent').hide();
+		index.find('AboutPageContent').hide();
+		index.find('TeamsPageContent-Systems').hide();
+		index.find('TeamsPageContent-Power').hide();
+		index.find('TeamsPageContent-Attitude').hide();
+		index.find('TeamsPageContent-Structures').hide();
+		index.find('TeamsPageContent-Thermal').hide();
 
         // FINISH ME (Task 4): add a handler to the 'Share a smile...' button to
         //                     show the 'form' and hide to button
