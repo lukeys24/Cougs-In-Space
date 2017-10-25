@@ -163,7 +163,7 @@ var Smile = (function() {
      * Add event handlers for submitting the create form.
      * @return {None}
      */
-    var attachCreateHandler = function(e) {
+    var attachTeamsPageHandler = function(e) {
         // First, hide the form, initially 
         create.find('form').hide();
 
