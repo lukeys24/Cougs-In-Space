@@ -3,22 +3,23 @@ var Cougs_In_Space = (function() {
 
     var attachHomePageHandler = function(e) {
         // First, hide the forms and page content initially
-		index.find('HomePageContent').show();      //HOMEPAGE HANDLER
-		index.find('TeamsCreateForm').hide();
-		index.find('DonorsPageContent').hide();
-		index.find('GetInvolvedPageContent').hide();
-		index.find('DonatePageContent').hide();
-		index.find('K-12PageContent').hide();
-		index.find('AboutPageContent').hide();
-		index.find('TeamsPageContent-Systems').hide();
-		index.find('TeamsPageContent-Power').hide();
-		index.find('TeamsPageContent-Attitude').hide();
-		index.find('TeamsPageContent-Structures').hide();
-		index.find('TeamsPageContent-Thermal').hide();
+		index.find('home-page').show();      //HOMEPAGE HANDLER
+		index.find('team-page').hide();
+		index.find('donors-page').hide();
+		index.find('get-involved-page').hide();
+		index.find('donate-page').hide();
+		index.find('K-k-12-page').hide();
+		index.find('about-page').hide();
+		index.find('systems-page').hide();
+		index.find('power-page').hide();
+		index.find('attitude-page').hide();
+		index.find('structure-page').hide();
+		index.find('thermal-page"').hide();
 
-  };
+    };
 
     var start = function() {
+        index = 
 
         attachHomePageHandler();
     };
