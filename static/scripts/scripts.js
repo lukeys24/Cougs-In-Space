@@ -18,8 +18,9 @@ var Cougs_In_Space = (function() {
 
     };
 
+    
+
     var start = function() {
-        index = 
 
         attachHomePageHandler();
     };
@@ -27,7 +28,12 @@ var Cougs_In_Space = (function() {
     // PUBLIC METHODS
     // any private methods returned in the hash are accessible via Smile.key_name, e.g. Smile.start()
     return {
+
         start: start
     };
 
 })();
+
+function test(id) {
+    
+}
