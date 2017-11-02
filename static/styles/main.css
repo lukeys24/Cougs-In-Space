@@ -21,6 +21,9 @@ h1 {
 	overflow: hidden;
 }
 
-.text-area {
-	
+.post-and-content-container {
+	display: inline-block;
+	background-color: blue;
+	margin-left: 20%;
+	margin-right: 20%;
 }

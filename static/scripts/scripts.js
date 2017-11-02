@@ -18,6 +18,8 @@ function showPage(id) {
     cis = $(".cis");
     if (id == 'Home-navbar') {
          cis.find('.home-page').show();
+         //find the nav bar element and add the active class
+         cis.find("Donors-navbar").$addClass("active")
     } else {
          cis.find('.home-page').hide();
     }
