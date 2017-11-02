@@ -34,6 +34,58 @@ var Cougs_In_Space = (function() {
 
 })();
 
-function test(id) {
+function showPage(id) {
+    alert(id);
+    if (id == 'Home-navbar') {
+
+    } else {
+
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+    if (id == 'Home-navbar') {
+
+    } else {
+        
+    }
+
 
 }
