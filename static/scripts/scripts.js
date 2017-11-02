@@ -8,7 +8,7 @@ var Cougs_In_Space = (function() {
 		index.find('donors-page').hide();
 		index.find('get-involved-page').hide();
 		index.find('donate-page').hide();
-		index.find('k-12-page').hide();
+		index.find('K-12-page').hide();
 		index.find('about-page').hide();
 		index.find('systems-page').hide();
 		index.find('power-page').hide();
@@ -41,51 +41,59 @@ function showPage(id) {
     } else {
 
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Our-Teams') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Systems-dropdown') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Power-dropdown') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Attitude-dropdown') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Structures-dropdown') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Thermal-dropdown') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Donors-navbar') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'GetInvolved-navbar') {
 
     } else {
         
     }
-    if (id == 'Home-navbar') {
+    if (id == 'Donate-navbar') {
 
     } else {
         
     }
+    if (id == 'K-12-navbar') {
 
+    } else {
+        
+    }
+    if (id == 'About-navbar') {
 
+    } else {
+        
+    }
 }
