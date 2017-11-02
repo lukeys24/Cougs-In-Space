@@ -18,7 +18,6 @@ function showPage(id) {
     cis = $(".cis");
     if (id == 'Home-navbar') {
          cis.find('.home-page').show();
-         alert("test");
     } else {
          cis.find('.home-page').hide();
     }
@@ -55,7 +54,7 @@ function showPage(id) {
     if (id == 'Donors-navbar') {
         cis.find('.donors-page').show();
     } else {
-        cis.find('.donors-page').hide();   
+        cis.find('.donors-page').hide();
     }
     if (id == 'GetInvolved-navbar') {
         cis.find('.get-involved-page').show();
