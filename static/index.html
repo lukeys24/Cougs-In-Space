@@ -66,6 +66,29 @@
   <!-- These divs are hidden initially and are activated using JQuery as a user activates the handlers-->
     <div class="container">
       <div class="row col-md-6 col-md-offset-3 text-area" style="position: fixed">
+          <div class="create" >
+        <form method="get" action="index.html">
+            <input type="text" placeholder="Title" class="title-input" name="title" />
+                <textarea class="story-input" placeholder="Team update" name="story"></textarea>
+                <label>Team Name</label>
+                <select class="team-name-input" name="team-name">
+                    <option value="1">Systems</option>
+                    <option value="2">Power</option>
+                    <option value="3">Attitude</option>
+                    <option value="4">Structures</option>
+                    <option value="5">Thermal</option>
+                    <option value="6">Home</option>
+                    <option value="7">Donors</option>
+                    <option value="8">Get Involved</option>
+                    <option value="9">Donated</option>
+                    <option value="10">K-12</option>
+                    <option value="11">About</option>
+                </select>
+                <a class="cancel" href="index.html">Cancel</a>
+            <input class="submit-input" type="submit" value="Post"/>
+        </form>
+    </div>
+
 		<div class="HomePageContent" >
 			Home Page content goes here
 		</div>
@@ -145,23 +168,6 @@
 
 </div>
 	<!-- /#sidebar-wrapper -->
-
-  <div class="create" hidden>
-        <form method="get" action="index.html">
-            <input type="text" placeholder="Title" class="title-input" name="title" />
-                <textarea class="story-input" placeholder="Team update" name="story"></textarea>
-                <label>Team Name</label>
-                <select class="team-name-input" name="team-name">
-                    <option value="1">Systems</option>
-                    <option value="2">Power</option>
-                    <option value="3">Attitude</option>
-                    <option value="4">Structures</option>
-                    <option value="5">Thermal</option>
-                </select>
-                <a class="cancel" href="index.html">Cancel</a>
-            <input class="submit-input" type="submit" value="Post"/>
-        </form>
-    </div>
 
 	<!-- /#Page Content Containers for hide/showing each links content -->
     </body>
