@@ -26,7 +26,7 @@ var Cougs_In_Space = (function() {
     };
 
     var attachCreateHandler = function(e) {
-        
+
         cis.on('click', '.submit', function(e) {
             e.preventDefault();
             create.find('form').hide();
@@ -36,6 +36,7 @@ var Cougs_In_Space = (function() {
     };
 
     var start = function() {
+        
         cis = $(".cis");
     };
 
@@ -53,7 +54,6 @@ function showPage(id) {
     if (id == 'Home-navbar') {
          cis.find('.home-page').show();
          //find the nav bar element and add the active class
-         cis.find("Donors-navbar").$addClass("active")
     } else {
          cis.find('.home-page').hide();
     }
