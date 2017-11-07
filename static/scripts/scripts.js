@@ -1,8 +1,42 @@
 var Cougs_In_Space = (function() {
 
+    var apiUrl = 'http://localhost:8080';
+    var cis;
+
+    var makeGetRequest = function(url, onSuccess, onFailure) {
+       $.ajax({
+           type: 'GET',
+           url: apiUrl + url,
+           dataType: "json",
+           success: onSuccess,
+           error: onFailure
+       });
+   };
+
+    var makePostRequest = function(url, data, onSuccess, onFailure) {
+        $.ajax({
+            type: 'POST',
+            url: apiUrl + url,
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            dataType: "json",
+            success: onSuccess,
+            error: onFailure
+        });
+    };
+
+    var attachCreateHandler = function(e) {
+        
+        cis.on('click', '.submit', function(e) {
+            e.preventDefault();
+            create.find('form').hide();
+            smiles.parent().find('.share-smile').show();
+            smiles.show();
+        });
+    };
 
     var start = function() {
-
+        cis = $(".cis");
     };
 
     // PUBLIC METHODS
