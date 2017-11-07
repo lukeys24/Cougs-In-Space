@@ -1,3 +1,7 @@
+window.onload = function() {
+    showPage('Home-navbar');
+};
+
 var Cougs_In_Space = (function() {
 
     var apiUrl = 'http://localhost:8080';
@@ -38,6 +42,7 @@ var Cougs_In_Space = (function() {
     var start = function() {
         
         cis = $(".cis");
+        attachCreateHandler();
     };
 
     // PUBLIC METHODS
@@ -112,4 +117,4 @@ function showPage(id) {
     } else {
         cis.find('.about-page').hide();
     }
-}
+};
