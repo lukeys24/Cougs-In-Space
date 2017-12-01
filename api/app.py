@@ -28,12 +28,12 @@ base_url = '/api/'
 
 # index
 #Loads all the given team posts that are currently hidden
-#when javascript event is triggered to allow a set of posts to come into view call show team,
+#when javascript event is triggered to allow a set of posts to come into view call show team in js,
 #those posts will be shown
 #called when a certain team is being viewed to show top 5 recent team posts
 #loads all posts given a team, count parameter(5 default) and order_by parameter(newest first default) 
 #return JSON
-@app.route(base_url + 'posts/<String:team>', methods=["GET"])
+@app.route(base_url + 'posts/<int:team>', methods=["GET"])
 def index(team):
     count = request.args.get('count', None)
     order_by = request.args.get('order_by', None)
@@ -55,7 +55,7 @@ def index(team):
 
 # show
 # loads team post given the id as a value in the URL
-@app.route(base_url + 'posts/<int:id>', methods=["POST"])
+@app.route(base_url + 'posts/<int:team>/<int:id>', methods=["POST"])
 def show(id):
 	row = Post.query.filter_by(id=id).first()
 	return jsonify({"post": row_to_obj(row), "status": 1}), 200
@@ -63,7 +63,7 @@ def show(id):
 
 # create
 # creates a team post given the params
-@app.route(base_url + 'posts/<String:team>', methods=['POST'])
+@app.route(base_url + 'posts/<int:team>', methods=['POST'])
 def create(team):
     post = Post(**request.json)
     db.session.add(post)
@@ -75,7 +75,7 @@ def create(team):
 
 # delete_entire_post_history
 # delete entire given team db history
-@app.route(base_url + 'posts/<String:team>', methods=['DELETE'])
+@app.route(base_url + 'posts/<int:team>', methods=['DELETE'])
 def delete_entire_post_history():
 	team = request.args.get('team', None)
 	
@@ -88,7 +88,7 @@ def delete_entire_post_history():
 
 # post_like
 #loads a post by its clicked ID and increments its like value
-@app.route(base_url + 'posts/<int:id>/like', methods=['POST'])
+@app.route(base_url + 'posts/<int:team>/<int:id>/like', methods=['POST'])
 def post_like(id):
 	
 	Post.query.filter_by(id=id).update({Post.like_count: Post.like_count + 1})
