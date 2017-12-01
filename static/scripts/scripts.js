@@ -4,6 +4,7 @@ window.onload = function() {
 
 var Cougs_In_Space = (function() {
 
+	//Private Variables
     var apiUrl = 'http://localhost:8080';
     var cis;
 
@@ -29,13 +30,45 @@ var Cougs_In_Space = (function() {
         });
     };
 
+    var insertPost = function(post, beginning) {
+        // Start with the template, make a new DOM element using jQuery
+        var newElem = $(postTemplateHtml);
+        // Populate the data in the new element
+        // Set the "id" attribute 
+        newElem.attr('id', smile.id); 
+        // Now fill in the data that we retrieved from the server
+		console.log(newElem.find('.inmid'));
+        newElem.find('.inmid').text(smile.title);
+		newElem.find('.story').text(smile.story);
+		if(smile.happiness_level == 2)
+			newElem.find('.happiness-level-1').removeClass("happiness-level-1").addClass('happiness-level-2');
+		if(smile.happiness_level == 3)
+			newElem.find('.happiness-level-1').removeClass("happiness-level-1").addClass('happiness-level-3');
+        newElem.find('.count').text(smile.like_count);
+		newElem.find('.timestamp').text(smile.created_at);
+        newElem.find('.updated_at').text(smile.updated_at);
+		
+		
+		//This should work and show the time and date@!
+		var myDate = new Date(smile.created_at); // Your timezone!
+		var myEpoch = myDate.getTime()/1000.0;
+		newElem.find('.timestamp').text(smile.myEpoch);
+
+        // FINISH ME (Task 2): fill-in the rest of the data
+		
+        if (beginning) {
+            smiles.prepend(newElem);
+        } else {
+            smiles.append(newElem);
+        }
+    };
     var attachCreateHandler = function(e) {
 
         cis.on('click', '.submit', function(e) {
             e.preventDefault();
             create.find('form').hide();
-            smiles.parent().find('.share-smile').show();
-            smiles.show();
+            post.parent().find('.create-post').show();
+            post.show();
         });
     };
 
@@ -43,6 +76,8 @@ var Cougs_In_Space = (function() {
         
         cis = $(".cis");
         attachCreateHandler();
+		//DOM template for posts
+		postTemplateHtml = $(".card-container .card")[0].outerHTML;
     };
 
     // PUBLIC METHODS

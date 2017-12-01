@@ -9,7 +9,6 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlalchemy-demo.db'
 
 db = sqlalchemy.SQLAlchemy(app)
-base_url = '/api/'
 
 #Team post template, will allow logged in user to dynamically add or delete a content post stored in a database
 class Post(db.Model):
@@ -24,6 +23,8 @@ class Post(db.Model):
 class User(db.Model):
 	name = db.Column(db.String(50), primary_key=True)
 	password = db.Column(db.String(50))
+
+base_url = '/api/'
 
 # index
 #Loads all the given team posts that are currently hidden
