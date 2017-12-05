@@ -5,6 +5,7 @@
 
 body {
 	background-color: #809fff;
+	overflow: auto;
 }
 
 .container {
