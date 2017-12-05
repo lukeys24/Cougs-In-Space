@@ -18,9 +18,8 @@ h1 {
 	display: inline-block;
 }
 
-.remove_whitespace {
+.page_image {
 	display: inline-block;
-	opacity: .7;
 	overflow: hidden;
 }
 
