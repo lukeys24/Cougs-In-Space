@@ -33,7 +33,7 @@ base_url = '/api/'
 #called when a certain team is being viewed to show top 5 recent team posts
 #loads all posts given a team, count parameter(5 default) and order_by parameter(newest first default) 
 #return JSON
-@app.route(base_url + 'posts/<int:team>', methods=["GET"])
+@app.route(base_url + 'posts/<string:team>', methods=["GET"])
 def index(team):
     count = request.args.get('count', None)
     order_by = request.args.get('order_by', None)
@@ -53,9 +53,28 @@ def index(team):
     return jsonify({"status": 1, "posts": result})
 
 
+@app.route(base_url + 'login/<string:username>/', methods=["GET"])
+def index(team):
+    count = request.args.get('count', None)
+    order_by = request.args.get('order_by', None)
+    team = request.args.get('team', None) 
+
+    if team is None:
+        return "Must provide team", 500
+    
+    query = Post.query.filter_by(team=team).order_by(order_by).limit(count).all() # store the results of your query here 
+    
+    result = []
+    for row in query:
+        result.append(
+            row_to_obj(row) # you must call this function to properly format 
+        )
+
+    return jsonify({"status": 1, "posts": result})
+
 # show
 # loads team post given the id as a value in the URL
-@app.route(base_url + 'posts/<int:team>/<int:id>', methods=["POST"])
+@app.route(base_url + 'posts/<string:team>/<int:id>', methods=["POST"])
 def show(id):
 	row = Post.query.filter_by(id=id).first()
 	return jsonify({"post": row_to_obj(row), "status": 1}), 200
@@ -63,7 +82,7 @@ def show(id):
 
 # create
 # creates a team post given the params
-@app.route(base_url + 'posts/<int:team>', methods=['POST'])
+@app.route(base_url + 'posts/<string:team>', methods=['POST'])
 def create(team):
     post = Post(**request.json)
     db.session.add(post)
