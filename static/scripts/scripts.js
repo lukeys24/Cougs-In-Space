@@ -4,6 +4,7 @@ window.onload = function() {
 
 var Cougs_In_Space = (function() {
 
+	//Private Variables
     var apiUrl = 'http://localhost:8080';
     var cis;
 
@@ -29,13 +30,93 @@ var Cougs_In_Space = (function() {
         });
     };
 
+    //inserts a post into a specific team section based on which team name the 
+    var insertPost = function(post, beginning, teamName) {
+        // Start with the template, make a new DOM element using jQuery
+        var newElem = $(postTemplateHtml);
+        // Populate the data in the new element
+        // Set the "id" attribute 
+        newElem.attr('id', post.id);
+        newElem.find('team-name').text(post.team);
+        newElem.find('title').text(post.title);
+        newElem.find('post-body').text(post.body);
+
+        // Now fill in the data that we retrieved from the server
+        switch(teamName) {
+            case "systems":
+            {
+                if (beginning) 
+                {
+                    systems-posts-container.prepend(newElem);
+                }
+                else
+                {
+                    systems-posts-container.append(newElem);
+                }
+                break;
+            }
+            case "attitude":
+            {
+                if (beginning) 
+                {
+                    attitude-posts-container.prepend(newElem);
+                }
+                else
+                {
+                    attitude-posts-container.append(newElem);
+                }
+                break;
+            }
+            case "power":
+            {
+                if (beginning) 
+                {
+                    power-posts-container.prepend(newElem);
+                }
+                else
+                {
+                    power-posts-container.append(newElem);
+                }
+                break;
+            }
+            case "thermal":
+            {
+                if (beginning) 
+                {
+                    thermal-posts-container.prepend(newElem);
+                }
+                else
+                {
+                    thermal-posts-container.append(newElem);
+                }
+                break;
+            }
+            case "structures":
+            {
+                if (beginning) 
+                {
+                    structures-posts-container.prepend(newElem);
+                }
+                else
+                {
+                    structures-posts-container.append(newElem);
+                }
+                break;
+            }
+            default:
+            {
+
+            }
+        }
+    };
+
     var attachCreateHandler = function(e) {
 
         cis.on('click', '.submit', function(e) {
             e.preventDefault();
             create.find('form').hide();
-            smiles.parent().find('.share-smile').show();
-            smiles.show();
+            post.parent().find('.create-post').show();
+            post.show();
         });
     };
 
@@ -43,6 +124,8 @@ var Cougs_In_Space = (function() {
         
         cis = $(".cis");
         attachCreateHandler();
+		//DOM template for posts
+		postTemplateHtml = $(".card-container .card")[0].outerHTML;
     };
 
     // PUBLIC METHODS
@@ -83,9 +166,9 @@ function showPage(id) {
         cis.find('.attitude-page').hide();
     }
     if (id == 'Structures-dropdown') {
-        cis.find('.structure-page').show();
+        cis.find('.structures-page').show();
     } else {
-        cis.find('.structure-page').hide();
+        cis.find('.structures-page').hide();
     }
     if (id == 'Thermal-dropdown') {
         cis.find('.thermal-page').show();
