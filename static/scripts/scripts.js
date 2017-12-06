@@ -200,4 +200,9 @@ function showPage(id) {
     } else {
         cis.find('.about-page').hide();
     }
+    if (id == 'Create-dropdown') {
+        cis.find('.create-page').show();
+    } else {
+        cis.find(".create-page").hide();
+    }
 };
