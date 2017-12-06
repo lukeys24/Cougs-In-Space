@@ -29,7 +29,7 @@ var Cougs_In_Space = (function() {
             error: onFailure
         });
     };
-    var displayPost = function() {
+    var displayPosts = function() {
         // Prepare the AJAX handlers for success and failure
         
         var onSuccess = function(data) {
@@ -39,17 +39,25 @@ var Cougs_In_Space = (function() {
             {
                 if (i == 0)
                 {
-                    insertPost(data.posts[i], true);
+                    insertPost(data.posts[i], true,data.posts[i].team);
                 }
-                insertPost(data.posts[i], true, data.posts[i].team);
+                else
+                {
+                    insertPost(data.posts[i], false, data.posts[i].team);
+                }
                 i++;
             }
         };
         var onFailure = function() { 
-            console.error('display smiles failed'); 
+            console.error('display posts failed'); 
         };
-        /* FINISH ME (Task 2): make a GET request to get recent smiles */
-        makeGetRequest("/api/smiles?space="+smileSpace+"&count=10&order_by=created_at", onSuccess, onFailure);
+        //Make a get request for each URL to get the most recent 5 posts from each team
+        makeGetRequest("/api/posts?team="Attitude", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team="Systems", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team="Power", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team="Thermal", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team="Structures", onSuccess, onFailure);
+
     };
     //inserts a post into a specific team section based on which team name the 
     var insertPost = function(post, beginning, teamName) {
@@ -148,6 +156,9 @@ var Cougs_In_Space = (function() {
 		//DOM template for posts
 		postTemplateHtml = $(".posts .post")[0].outerHTML;
         posts.html = ('');
+
+        displayPosts();
+        attachCreateHandler();
     };
 
     // PUBLIC METHODS
