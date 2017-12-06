@@ -3,9 +3,9 @@ window.onload = function() {
 };
 
 var Cougs_In_Space = (function() {
-
 	//Private Variables
-    var apiUrl = 'http://localhost:8080';
+    console.error('we reached beginning');
+    var apiUrl = 'http://localhost:5000';
     var cis;
 
     var makeGetRequest = function(url, onSuccess, onFailure) {
@@ -29,9 +29,10 @@ var Cougs_In_Space = (function() {
             error: onFailure
         });
     };
+
     var displayPosts = function() {
         // Prepare the AJAX handlers for success and failure
-        
+         console.error('we reached inside display posts');
         var onSuccess = function(data) {
             //Calls and inserts the 5 posts into the correct page
             var i = 0;
@@ -39,7 +40,7 @@ var Cougs_In_Space = (function() {
             {
                 if (i == 0)
                 {
-                    insertPost(data.posts[i], true,data.posts[i].team);
+                    insertPost(data.posts[i], true, data.posts[i].team);
                 }
                 else
                 {
@@ -52,16 +53,17 @@ var Cougs_In_Space = (function() {
             console.error('display posts failed'); 
         };
         //Make a get request for each URL to get the most recent 5 posts from each team
-        makeGetRequest("/api/posts?team="Attitude", onSuccess, onFailure);
-        makeGetRequest("/api/posts?team="Systems", onSuccess, onFailure);
-        makeGetRequest("/api/posts?team="Power", onSuccess, onFailure);
-        makeGetRequest("/api/posts?team="Thermal", onSuccess, onFailure);
-        makeGetRequest("/api/posts?team="Structures", onSuccess, onFailure);
-
+        console.log('we reached makeGetRequest');
+        makeGetRequest("/api/posts?team=Attitude", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Systems", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Power", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Thermal", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Structures", onSuccess, onFailure);
     };
     //inserts a post into a specific team section based on which team name the 
     var insertPost = function(post, beginning, teamName) {
         // Start with the template, make a new DOM element using jQuery
+        console.log('we reached insertPost');
         var newElem = $(postTemplateHtml);
         // Populate the data in the new element
         // Set the "id" attribute 
@@ -141,30 +143,60 @@ var Cougs_In_Space = (function() {
 
     var attachCreateHandler = function(e) {
 
-        cis.on('click', '.submit', function(e) {
+        // FINISH ME (Task 4): add a handler for the 'Cancel' button to hide the form
+        // and show the 'Shared a smile...' button
+        cis.parent().on('click', '.cancel', function(e) {
             e.preventDefault();
-            create.find('form').hide();
-            post.parent().find('.create-post').show();
-            post.show();
+        });
+
+        // The handler for the Post button in the form
+        cis.parent().on('click', '.submit', function (e) {
+            e.preventDefault (); // Tell the browser to skip its default click action
+
+            var post = {};
+            post.title = cis.parent().find('.createTitle').val();
+            post.update = cis.parent().find('.postBody').val();
+            post.like_count = 0;
+            space = cis.parent().find('.teamSelect').val();
+
+
+            // FINISH ME (Task 4): collect the rest of the data for the smile
+            var onSuccess = function(data) {
+                displayPosts();
+            };
+            var onFailure = function(error) { 
+                console.error(error.status); 
+            };
+            
+            // FINISH ME (Task 4): make a POST request to create the smile, then 
+            //            hide the form and show the 'Shared a smile...' button
+            if (post.title.length == 0 || post.title.length > 64) {
+                window.alert("Title length is invalid");
+            } else if (post.update.length == 0 || post.update.length > 2048) {
+                window.alert("Update length is invalid");
+            } else {
+                makePostRequest("/api/posts/" + space, post, onSuccess, onFailure);
+            }
         });
     };
 
     var start = function() {
-        
+        console.error('we reached start');
         cis = $(".cis");
+        post = $(".post-container");
         attachCreateHandler();
 		//DOM template for posts
-		postTemplateHtml = $(".posts .post")[0].outerHTML;
-        posts.html = ('');
+		postTemplateHtml = $(".post-container")[0].outerHTML;
+        post.html = ('');
 
         displayPosts();
+        console.error('we reached after display posts');
         attachCreateHandler();
     };
 
     // PUBLIC METHODS
     // any private methods returned in the hash are accessible via Smile.key_name, e.g. Smile.start()
     return {
-
         start: start
     };
 
@@ -232,5 +264,10 @@ function showPage(id) {
         cis.find('.about-page').show();
     } else {
         cis.find('.about-page').hide();
+    }
+    if (id == 'Create-dropdown') {
+        cis.find('.create-page').show();
+    } else {
+        cis.find(".create-page").hide();
     }
 };

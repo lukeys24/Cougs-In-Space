@@ -1,24 +1,25 @@
 .jumbotron {
 	background-color: #809fff;
+	background-image: url(Stars.jpg);
 	margin: 0px;
 }
 
 body {
 	background-color: #809fff;
-	overflow: auto;
+	overflow-y: scroll;
 }
 
 .container {
 	float: left;
+	overflow-y: scroll;
 }
 
 h1 {
 	display: inline-block;
 }
 
-.remove_whitespace {
+.page_image {
 	display: inline-block;
-	opacity: .7;
 	overflow: hidden;
 }
 
