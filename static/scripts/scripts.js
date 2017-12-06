@@ -29,7 +29,28 @@ var Cougs_In_Space = (function() {
             error: onFailure
         });
     };
-
+    var displayPost = function() {
+        // Prepare the AJAX handlers for success and failure
+        
+        var onSuccess = function(data) {
+            //Calls and inserts the 5 posts into the correct page
+            var i = 0;
+            while(data.posts[i] != null)
+            {
+                if (i == 0)
+                {
+                    insertPost(data.posts[i], true);
+                }
+                insertPost(data.posts[i], true, data.posts[i].team);
+                i++;
+            }
+        };
+        var onFailure = function() { 
+            console.error('display smiles failed'); 
+        };
+        /* FINISH ME (Task 2): make a GET request to get recent smiles */
+        makeGetRequest("/api/smiles?space="+smileSpace+"&count=10&order_by=created_at", onSuccess, onFailure);
+    };
     //inserts a post into a specific team section based on which team name the 
     var insertPost = function(post, beginning, teamName) {
         // Start with the template, make a new DOM element using jQuery
@@ -175,7 +196,8 @@ var Cougs_In_Space = (function() {
         cis = $(".cis");
         attachCreateHandler();
 		//DOM template for posts
-		postTemplateHtml = $(".card-container .card")[0].outerHTML;
+		postTemplateHtml = $(".posts .post")[0].outerHTML;
+        posts.html = ('');
     };
 
     // PUBLIC METHODS
