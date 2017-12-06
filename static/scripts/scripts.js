@@ -110,13 +110,63 @@ var Cougs_In_Space = (function() {
         }
     };
 
+    var displayPosts = function () {
+        var onSuccess = function(data) {
+            var json = data.posts;
+            /*
+            for (i = 0; i < json.length; i++) {
+                if (i == 0) {
+                    insertSmile(json[i], true);
+                } else {
+                    insertSmile(json[i], false);
+                }
+            }
+            */
+            
+        };
+        var onFailure = function(error) { 
+            console.error(error.status);
+        };
+        /* FINISH ME (Task 2): make a GET request to get recent smiles */
+        makeGetRequest("/api/posts/Power", onSuccess, onFailure);
+    };
+
     var attachCreateHandler = function(e) {
 
-        cis.on('click', '.submit', function(e) {
+        // FINISH ME (Task 4): add a handler for the 'Cancel' button to hide the form
+        // and show the 'Shared a smile...' button
+        cis.parent().on('click', '.cancel', function(e) {
             e.preventDefault();
-            create.find('form').hide();
-            post.parent().find('.create-post').show();
-            post.show();
+        });
+
+        // The handler for the Post button in the form
+        cis.parent().on('click', '.submit', function (e) {
+            e.preventDefault (); // Tell the browser to skip its default click action
+
+            var post = {}; // Prepare the smile object to send to the server
+            post.title = cis.parent().find('.createTitle').val();
+            post.update = cis.parent().find('.postBody').val();
+            post.like_count = 0;
+            space = cis.parent().find('.teamSelect').val();
+
+
+            // FINISH ME (Task 4): collect the rest of the data for the smile
+            var onSuccess = function(data) {
+                displayPosts();
+            };
+            var onFailure = function(error) { 
+                console.error(error.status); 
+            };
+            
+            // FINISH ME (Task 4): make a POST request to create the smile, then 
+            //            hide the form and show the 'Shared a smile...' button
+            if (post.title.length == 0 || post.title.length > 64) {
+                window.alert("Title length is invalid");
+            } else if (post.update.length == 0 || post.update.length > 2048) {
+                window.alert("Update length is invalid");
+            } else {
+                makePostRequest("/api/posts/" + space, post, onSuccess, onFailure);
+            }
         });
     };
 
