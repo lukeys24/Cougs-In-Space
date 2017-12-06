@@ -31,14 +31,18 @@ base_url = '/api/'
 #called when a certain team is being viewed to show top 5 recent team posts
 #loads all posts given a team, count parameter(5 default) and order_by parameter(newest first default) 
 #return JSON
-@app.route(base_url + 'posts/<string:team>', methods=["GET"])
+#http://localhost:5000/api/posts?team=Attitude - in postman under GET
+@app.route(base_url + 'posts', methods=["GET"])
 def index():
-
+    team = request.args.get("team", None)
+    print(team)
     if team is None:
         return "Must provide team", 500
-    
-    query = Post.query.filter_by(team=team).order_by(id).limit(count).all() # store the results of your query here 
-    
+ 
+    count = 5
+    #query = Post.query.filter_by(team=team).order_by(id).limit(count).all() # store the results of your query here 
+    query = Post.query.filter_by(team=team).all()
+
     result = []
     for row in query:
         result.append(
@@ -47,6 +51,18 @@ def index():
 
     return jsonify({"status": 1, "posts": result})
 
+# create
+# creates a team post given the params
+#http://localhost:5000/api/posts/Attitude - in postman POST
+@app.route(base_url + 'posts/<string:team>', methods=['POST'])
+def create(team):
+    post = Post(**request.json)
+    db.session.add(post)
+    db.session.commit()
+
+    db.session.refresh(post)
+
+    return jsonify({"status": 1, "post": row_to_obj(post)}), 200
 
 # @app.route(base_url + 'login/<string:username>', methods=["GET"])
 # def index(team):
@@ -74,19 +90,6 @@ def index():
 # 	row = Post.query.filter_by(id=id).first()
 # 	return jsonify({"post": row_to_obj(row), "status": 1}), 200
 
-
-# create
-# creates a team post given the params
-@app.route(base_url + 'posts/<string:team>', methods=['POST'])
-def create(team):
-    post = Post(**request.json)
-    db.session.add(post)
-    db.session.commit()
-
-    db.session.refresh(post)
-
-    return jsonify({"status": 1, "post": row_to_obj(post)}), 200
-
 # delete_entire_post_history
 # delete entire given team db history
 # @app.route(base_url + 'posts/<string:team>', methods=['DELETE'])
@@ -112,6 +115,7 @@ def create(team):
 def row_to_obj(row):
     row = {
             "id": row.id,
+            "team": row.team,
             "title": row.title,
             "update": row.update
         }
