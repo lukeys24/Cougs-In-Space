@@ -36,19 +36,9 @@ var Cougs_In_Space = (function() {
             console.log('we reached inside on success for posts');
             //Calls and inserts the 5 posts into the correct page
             var i = 0;
-            while(data.posts[i] != null)
+            while(data.posts[i] != null && i <= 4)
             {
-                console.log(i);
-                console.log(data.posts[i].team);
-                console.log(data.posts[i]);
-                if (i == 0)
-                {
-                    insertPost(data.posts[i], true);
-                }
-                else
-                {
-                    insertPost(data.posts[i], false);
-                }
+                insertPost(data.posts[i]);
                 i++;
             }
         };
@@ -57,87 +47,52 @@ var Cougs_In_Space = (function() {
         };
         //Make a get request for each URL to get the most recent 5 posts from each team
         makeGetRequest("/api/posts?team=Attitude", onSuccess, onFailure);
-        console.log('we came out of this call');
         makeGetRequest("/api/posts?team=Systems", onSuccess, onFailure);
         makeGetRequest("/api/posts?team=Power", onSuccess, onFailure);
         makeGetRequest("/api/posts?team=Thermal", onSuccess, onFailure);
         makeGetRequest("/api/posts?team=Structures", onSuccess, onFailure);
     };
     //inserts a post into a specific team section based on which team name the 
-    var insertPost = function(post, beginning) {
+    var insertPost = function(post) {
         console.log('we reached insertPost, about to add eleements to dom object');
         // Start with the template, make a new DOM element using jQuery
         var newElem = $(postTemplateHtml);
-        console.log(newElem);
         // Populate the data in the new element
         // Set the "id" attribute 
-        newElem.attr('post-id', post.id);
-        console.log(post.id);
-        newElem.find('post-title').text(post.title);
-        newElem.find('post-body').text(post.body);
-        newElem.find('team-name').text(post.team);
+        newElem.find('.post-id').text(post.id);
+        newElem.find('.post-title').text(post.title);
+        newElem.find('.post-body').text(post.update);
+        newElem.find('.team-name').text(post.team);
         // Now fill in the data that we retrieved from the server
         switch(post.team) {
             case "Systems":
             {
                 console.log('we reached insertPost, about to insert systems post');
-                if (beginning) 
-                {
-                    systems-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    systems-posts-container.append(newElem);
-                }
+                $(".systems-posts-container").append(newElem);
                 break;
             }
             case "Attitude":
             {
                 console.log('we reached insertPost, about to insert attitude post');
-                if (beginning) 
-                {
-                    $("attitude-posts-container").prepend(newElem);
-                }
-                else
-                {
-                    $("attitude-posts-container").append(newElem);
-                }
+                $(".attitude-posts-container").append(newElem);
                 break;
             }
             case "Power":
             {
-                if (beginning) 
-                {
-                    power-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    power-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert power post');
+                $(".power-posts-container").append(newElem);
                 break;
             }
             case "Thermal":
             {
-                if (beginning) 
-                {
-                    thermal-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    thermal-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert thermal post');
+                $(".thermal-posts-container").append(newElem);
                 break;
             }
             case "Structures":
             {
-                if (beginning) 
-                {
-                    structures-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    structures-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert structures post');
+                $(".structures-posts-container").append(newElem);
                 break;
             }
             default:
@@ -189,10 +144,12 @@ var Cougs_In_Space = (function() {
     var start = function() {
         cis = $(".cis");
         post = $(".post-container");
+
         attachCreateHandler();
 		//DOM template for posts
 		postTemplateHtml = $(".post-container")[0].outerHTML;
-        post.html = ('');
+        
+        post.html('');
 
         displayPosts();
         console.log('we reached after display posts');
