@@ -32,6 +32,12 @@ var Cougs_In_Space = (function() {
     var displayPosts = function() {
         // Prepare the AJAX handlers for success and failure
          console.log('we reached inside display posts');
+         $('.systems-posts-container').html('');
+         $('.power-posts-container').html('');
+         $('.structures-posts-container').html('');
+         $('.thermal-posts-container').html('');
+         $('.attitude-posts-container').html('');
+
         var onSuccess = function(data) {
             console.log('we reached inside on success for posts');
             //Calls and inserts the 5 posts into the correct page
@@ -40,7 +46,7 @@ var Cougs_In_Space = (function() {
             {
                 insertPost(data.posts[i]);
                 i++;
-            }
+            }   
         };
         var onFailure = function() { 
             console.error('display posts failed'); 
@@ -111,19 +117,18 @@ var Cougs_In_Space = (function() {
         });
 
         // The handler for the Post button in the form
-        cis.parent().on('click', '.submit', function (e) {
+        cis.parent().find('.submit').unbind().click(function (e) {
             e.preventDefault (); // Tell the browser to skip its default click action
 
             var post = {};
+            post.team = cis.parent().find('.teamSelect').val();
             post.title = cis.parent().find('.createTitle').val();
             post.update = cis.parent().find('.postBody').val();
-            post.like_count = 0;
             space = cis.parent().find('.teamSelect').val();
 
-
-            // FINISH ME (Task 4): collect the rest of the data for the smile
             var onSuccess = function(data) {
                 displayPosts();
+                location.reload();
             };
             var onFailure = function(error) { 
                 console.error(error.status); 

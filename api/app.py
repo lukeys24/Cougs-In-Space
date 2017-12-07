@@ -44,7 +44,7 @@ def index():
     query = Post.query.filter_by(team=team).all()
 
     result = []
-    for row in query:
+    for row in reversed(query):
         result.append(
             row_to_obj(row) # you must call this function to properly format 
         )
