@@ -111,13 +111,12 @@ var Cougs_In_Space = (function() {
         });
 
         // The handler for the Post button in the form
-        cis.parent().on('click', '.submit', function (e) {
+        cis.parent().find('.submit').unbind().click(function (e) {
             e.preventDefault (); // Tell the browser to skip its default click action
-
             var post = {};
+            post.team = cis.parent().find('.teamSelect').val();
             post.title = cis.parent().find('.createTitle').val();
             post.update = cis.parent().find('.postBody').val();
-            post.like_count = 0;
             space = cis.parent().find('.teamSelect').val();
 
 
