@@ -82,14 +82,11 @@
 			       <li><a href="#" id="About-navbar" onClick="showPage(this.id)">About</a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="username" placeholder="Username">
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="password" placeholder="Password">
-                   </div>
-                   <button type="submit" class="btn btn-default">Sign In</button>
-                   <button type="submit" class="btn btn-default">Sign Out</button>
+                  
+                   <button type="button" class="btn btn-default sign-in"><a href="login.html">Sign In</a></button>
+                 
+                   <button type="submit" class="btn btn-default sign-out">Sign Out</button>
+                 
             </form>
           </div>
         </nav>
@@ -101,11 +98,11 @@
 
   <!-- Sidebar -->
 
-  <div class="container">
+  <div class="container-fluid" style="position:fixed">
 
     <div class="row">
-
-	<nav class="col-xs-2 col-xs-2 col-xs-2 navbar navbar-inverse" id="sidebar-wrapper" role="navigation" style="position:fixed">
+<div class="span2">
+	<nav class="col-xs-2 navbar navbar-inverse side-nav" id="sidebar-wrapper" role="navigation" style="position:fixed">
 		<ul class="nav sidebar-nav">
 			<li class="sidebar-brand">
 				<a href="#" id="Our-Teams" onClick="showPage(this.id)">
@@ -128,15 +125,16 @@
 				<a href="#" id="Thermal-dropdown" onClick="showPage(this.id)">Thermal</a>
 			</li>
       <li>
-        <a href="#" id="Create-dropdown" onClick="showPage(this.id)">Create</a>
+        <a href="#" id="Create-dropdown" onClick="showPage(this.id)">Post an Update</a>
       </li>
 		</ul>
 	</nav>
 </div>
 </div>
+</div>
 
 
-<div class="container">
+<div class="container" style="overflow:hidden">
   <div class="row col-xs-8 col-xs-offset-3 text-area" style="position: fluid">
 		<div class="card-container">
 			<div class="card">
@@ -223,12 +221,13 @@
 
 			<div class="card"> <!-- Begin Systems Content Container -->
 			  <div class="card-body systems-page">
+          <p class="centered" style="font-size:250%"><strong>Team Systems</strong></p>
           <a class="page_image col-md-12">
             <img src="images/Team_Systems.jpg" alt="Not working" style="height: 175px">
           </a>
-          The ground control and systems integration team is fully responsible for the multi-module integration of all major cube sat sub-systems as well as the entire ground to satellite communications API.
+          <p style="font-size:125%">The ground control and systems integration team is fully responsible for the multi-module integration of all major cube sat sub-systems as well as the entire ground to satellite communications API.
           On the ground control side, our goal is to build and design an involved and extremely functional API that will be operated by the chief ground communications operator throughout the life span of the cube satellite.
-          Our ground control API will have many features and nuances that will define what kinds of data, commands, telemetry, and operational status information we would like to send and receive from our satellite throughout the project.
+          Our ground control API will have many features and nuances that will define what kinds of data, commands, telemetry, and operational status information we would like to send and receive from our satellite throughout the project.</p>
 				<div class="systems-posts-container">
 				Inject 5 posts here
 			  	</div>
@@ -240,11 +239,11 @@
           <a class="page_image col-md-12">
             <img src="images/Team_Power.jpg" alt="Not working" style="height: 175px">
           </a>
-The power systems team is responsible for the generation, management, and distribution of power to all of the loads found on the cubesat.
-Power generation is centered around harvesting energy from the sun through the use of high-efficiency solar panels mounted on the outside faces of the cubesat.
-Power management consists of regulating the generated power to ensure that each load is supplied with an adequate amount of power with the desired characteristics (voltage, current, etc.) needed for proper operation.
-High energy density batteries are also to be used to store power for when the cubesat is not receiving sunlight.
-Power distribution involves switching power to the various loads at the desired operation times such that power can be supplied reliably and efficiently to ensure optimal operation while also conserving power for high-priority loads.
+          The power systems team is responsible for the generation, management, and distribution of power to all of the loads found on the cubesat.
+          Power generation is centered around harvesting energy from the sun through the use of high-efficiency solar panels mounted on the outside faces of the cubesat.
+          Power management consists of regulating the generated power to ensure that each load is supplied with an adequate amount of power with the desired characteristics (voltage, current, etc.) needed for proper operation.
+          High energy density batteries are also to be used to store power for when the cubesat is not receiving sunlight.
+          Power distribution involves switching power to the various loads at the desired operation times such that power can be supplied reliably and efficiently to ensure optimal operation while also conserving power for high-priority loads.
 				<div class="power-posts-container">
 				Inject 5 posts here
 			  	</div>
@@ -256,9 +255,9 @@ Power distribution involves switching power to the various loads at the desired 
           <a class="page_image col-md-12">
             <img src="images/Team_Controls_Communication.jpg" alt="Not working" style="height: 175px">
           </a>
-On the on-board systems and integration side, we are highly motivated on completely developing an in house total flight control and analysis software that will enable us to communicate directly with all integrated subsystems developed by the other teams.
-We are striving to build the bridge between all devices, both physically and abstractly, that will enable complete device comprehension and coherence.
-We expect that this will allow for all-inclusive control and communication between our primary ground control station and all centralized on-board systems and subsystems.
+          On the on-board systems and integration side, we are highly motivated on completely developing an in house total flight control and analysis software that will enable us to communicate directly with all integrated subsystems developed by the other teams.
+          We are striving to build the bridge between all devices, both physically and abstractly, that will enable complete device comprehension and coherence.
+          We expect that this will allow for all-inclusive control and communication between our primary ground control station and all centralized on-board systems and subsystems.
 				<div class="attitude-posts-container">
 				Inject 5 posts here
 			  	</div>
@@ -270,10 +269,10 @@ We expect that this will allow for all-inclusive control and communication betwe
           <a class="page_image col-md-12">
             <img src="images/Team_Structures.jpg" alt="Not working" style="height: 175px">
           </a>
-The Structures team is primarily made up of Mechanical and Material Science Engineering majors and has the responsibility of managing the physical needs of the club.
-Apart from the CubeSat frame, we will design and build any other needed structures, such as joints, fastenings, deployables, and mountings for both the spacecraft and for testing purposes.
-We must ensure the physical durability of the craft by following the required standards and by modeling and testing the vibration response from launch vehicle specifications.
-We are composing CAD models of all spacecraft components and managing the mass budget, while also controlling volume allocation.
+          The Structures team is primarily made up of Mechanical and Material Science Engineering majors and has the responsibility of managing the physical needs of the club.
+          Apart from the CubeSat frame, we will design and build any other needed structures, such as joints, fastenings, deployables, and mountings for both the spacecraft and for testing purposes.
+          We must ensure the physical durability of the craft by following the required standards and by modeling and testing the vibration response from launch vehicle specifications.
+          We are composing CAD models of all spacecraft components and managing the mass budget, while also controlling volume allocation.
 				<div class="structures-posts-container">
 				Inject 5 posts here
 			  	</div>
@@ -285,9 +284,9 @@ We are composing CAD models of all spacecraft components and managing the mass b
           <a class="page_image col-md-12">
             <img src="images/Team_Thermal.jpg" alt="Not working" style="height: 175px">
           </a>
-The primary goal of the Thermal Systems team is to protect the satellite from the extremely harsh conditions of space.
-Our plan is to maintain the satellites longevity throughout the mission by protecting all components within our cubesat.
-To ensure survivability, we are researching and testing material that will combat the rapid and intense temperature changes, extreme radiation, and the thermal expansion of the cubesat in space.
+          The primary goal of the Thermal Systems team is to protect the satellite from the extremely harsh conditions of space.
+          Our plan is to maintain the satellites longevity throughout the mission by protecting all components within our cubesat.
+          To ensure survivability, we are researching and testing material that will combat the rapid and intense temperature changes, extreme radiation, and the thermal expansion of the cubesat in space.
 				<div class="thermal-posts-container">
 				Inject 5 posts here
 			  	</div>

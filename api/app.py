@@ -64,54 +64,22 @@ def create(team):
 
     return jsonify({"status": 1, "post": row_to_obj(post)}), 200
 
-# @app.route(base_url + 'login/<string:username>', methods=["GET"])
-# def index(team):
-#     count = request.args.get('count', None)
-#     order_by = request.args.get('order_by', None)
-#     team = request.args.get('team', None) 
+#Login
+# @app.route(base_url + '/login', methods=['GET'])
+# def do_admin_login():
+# 	_USERNAME = request.args.get("username", None)
+# 	_PASSWORD= request.args.get("password", None)
 
-#     if team is None:
-#         return "Must provide team", 500
-    
-#     query = Post.query.filter_by(team=team).order_by(order_by).limit(count).all() # store the results of your query here 
-    
-#     result = []
-#     for row in query:
-#         result.append(
-#             row_to_obj(row) # you must call this function to properly format 
-#         )
-
-#     return jsonify({"status": 1, "posts": result})
-
-# show
-# loads team post given the id as a value in the URL
-# @app.route(base_url + 'posts/<string:team>/<int:id>', methods=["POST"])
-# def show(id):
-# 	row = Post.query.filter_by(id=id).first()
-# 	return jsonify({"post": row_to_obj(row), "status": 1}), 200
-
-# delete_entire_post_history
-# delete entire given team db history
-# @app.route(base_url + 'posts/<string:team>', methods=['DELETE'])
-# def delete_entire_post_history():
-# 	team = request.args.get('team', None)
-	
-# 	if (team is None ):
-# 		return jsonify({"Error": -1}), 500
+# 	if _USERNAME == "admin" and _PASSWORD == "password":
+# 		return jsonify({"status": 1, "login": {"login": "Success"}})
 # 	else:
-# 		Post.query.filter_by(Post=post).delete()  #needs to be (team=team)?
-# 		db.session.commit()
-# 		return jsonify({"status": 1}), 200
+# 		return jsonify({"status": 0, "login": {"login": "Failure"}})
+ 
+# @app.route("/logout")
+# def logout():
+#     pass
 
-# post_like
-#loads a post by its clicked ID and increments its like value
-# @app.route(base_url + 'posts/<string:team>', methods=['POST'])
-# def post_post(id):
-	
-# 	Post.query.filter_by(id=id).update({Post.like_count: Post.like_count + 1})
-# 	db.session.commit()
-# 	return jsonify({"status Updated": 1}), 200
-	
+
 def row_to_obj(row):
     row = {
             "id": row.id,
@@ -124,8 +92,8 @@ def row_to_obj(row):
 
   
 def main():
-    db.create_all() # creates the tables you've provided
-    app.run()       # runs the Flask application  
+	db.create_all() # creates the tables you've provided
+	app.run()       # runs the Flask application  
 
 if __name__ == '__main__':
     main()

@@ -144,6 +144,26 @@ var Cougs_In_Space = (function() {
                 makePostRequest("/api/posts/" + space, post, onSuccess, onFailure);
             }
         });
+
+        cis.parent().find('.sign-in').unbind().click(function (e) {
+            e.preventDefault();
+            //window.location.replace('http://localhost:5000/static/login');
+
+            //makeGetRequest = function(/login, onSuccessLogin, onFailureLogin);
+
+        });
+            // var onSuccessLogin = function(data) {
+            //     if (data[0].login == "Success")
+            //         window.alert("You've logged in!");
+            //     else:
+            //         window.alert("Failed to log in.");
+            // };
+            // var onFailureLogin = function(error) { 
+            //     window.alert("Failed to log in error.");
+            // };
+         cis.parent().find('.sign-out').unbind().click(function (e) {
+            e.preventDefault();
+        });
     };
 
     var start = function() {
