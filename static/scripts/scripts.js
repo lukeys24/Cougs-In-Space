@@ -3,9 +3,8 @@ window.onload = function() {
 };
 
 var Cougs_In_Space = (function() {
-
 	//Private Variables
-    var apiUrl = 'http://localhost:8080';
+    var apiUrl = 'http://localhost:5000';
     var cis;
 
     var makeGetRequest = function(url, onSuccess, onFailure) {
@@ -29,99 +28,71 @@ var Cougs_In_Space = (function() {
             error: onFailure
         });
     };
-    var displayPost = function() {
+
+    var displayPosts = function() {
         // Prepare the AJAX handlers for success and failure
-        
+         console.log('we reached inside display posts');
         var onSuccess = function(data) {
+            console.log('we reached inside on success for posts');
             //Calls and inserts the 5 posts into the correct page
             var i = 0;
-            while(data.posts[i] != null)
+            while(data.posts[i] != null && i <= 4)
             {
-                if (i == 0)
-                {
-                    insertPost(data.posts[i], true);
-                }
-                insertPost(data.posts[i], true, data.posts[i].team);
+                insertPost(data.posts[i]);
                 i++;
             }
         };
         var onFailure = function() { 
-            console.error('display smiles failed'); 
+            console.error('display posts failed'); 
         };
-        /* FINISH ME (Task 2): make a GET request to get recent smiles */
-        makeGetRequest("/api/smiles?space="+smileSpace+"&count=10&order_by=created_at", onSuccess, onFailure);
+        //Make a get request for each URL to get the most recent 5 posts from each team
+        makeGetRequest("/api/posts?team=Attitude", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Systems", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Power", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Thermal", onSuccess, onFailure);
+        makeGetRequest("/api/posts?team=Structures", onSuccess, onFailure);
     };
     //inserts a post into a specific team section based on which team name the 
-    var insertPost = function(post, beginning, teamName) {
+    var insertPost = function(post) {
+        console.log('we reached insertPost, about to add eleements to dom object');
         // Start with the template, make a new DOM element using jQuery
         var newElem = $(postTemplateHtml);
         // Populate the data in the new element
         // Set the "id" attribute 
-        newElem.attr('id', post.id);
-        newElem.find('team-name').text(post.team);
-        newElem.find('title').text(post.title);
-        newElem.find('post-body').text(post.body);
-
+        newElem.find('.post-id').text(post.id);
+        newElem.find('.post-title').text(post.title);
+        newElem.find('.post-body').text(post.update);
+        newElem.find('.team-name').text(post.team);
         // Now fill in the data that we retrieved from the server
-        switch(teamName) {
-            case "systems":
+        switch(post.team) {
+            case "Systems":
             {
-                if (beginning) 
-                {
-                    systems-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    systems-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert systems post');
+                $(".systems-posts-container").append(newElem);
                 break;
             }
-            case "attitude":
+            case "Attitude":
             {
-                if (beginning) 
-                {
-                    attitude-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    attitude-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert attitude post');
+                $(".attitude-posts-container").append(newElem);
                 break;
             }
-            case "power":
+            case "Power":
             {
-                if (beginning) 
-                {
-                    power-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    power-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert power post');
+                $(".power-posts-container").append(newElem);
                 break;
             }
-            case "thermal":
+            case "Thermal":
             {
-                if (beginning) 
-                {
-                    thermal-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    thermal-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert thermal post');
+                $(".thermal-posts-container").append(newElem);
                 break;
             }
-            case "structures":
+            case "Structures":
             {
-                if (beginning) 
-                {
-                    structures-posts-container.prepend(newElem);
-                }
-                else
-                {
-                    structures-posts-container.append(newElem);
-                }
+                console.log('we reached insertPost, about to insert structures post');
+                $(".structures-posts-container").append(newElem);
                 break;
             }
             default:
@@ -129,27 +100,6 @@ var Cougs_In_Space = (function() {
 
             }
         }
-    };
-
-    var displayPosts = function () {
-        var onSuccess = function(data) {
-            var json = data.posts;
-            /*
-            for (i = 0; i < json.length; i++) {
-                if (i == 0) {
-                    insertSmile(json[i], true);
-                } else {
-                    insertSmile(json[i], false);
-                }
-            }
-            */
-            
-        };
-        var onFailure = function(error) { 
-            console.error(error.status);
-        };
-        /* FINISH ME (Task 2): make a GET request to get recent smiles */
-        makeGetRequest("/api/posts/Power", onSuccess, onFailure);
     };
 
     var attachCreateHandler = function(e) {
@@ -164,7 +114,7 @@ var Cougs_In_Space = (function() {
         cis.parent().on('click', '.submit', function (e) {
             e.preventDefault (); // Tell the browser to skip its default click action
 
-            var post = {}; // Prepare the smile object to send to the server
+            var post = {};
             post.title = cis.parent().find('.createTitle').val();
             post.update = cis.parent().find('.postBody').val();
             post.like_count = 0;
@@ -192,18 +142,23 @@ var Cougs_In_Space = (function() {
     };
 
     var start = function() {
-        
         cis = $(".cis");
+        post = $(".post-container");
+
         attachCreateHandler();
 		//DOM template for posts
-		postTemplateHtml = $(".posts .post")[0].outerHTML;
-        posts.html = ('');
+		postTemplateHtml = $(".post-container")[0].outerHTML;
+        
+        post.html('');
+
+        displayPosts();
+        console.log('we reached after display posts');
+        attachCreateHandler();
     };
 
     // PUBLIC METHODS
     // any private methods returned in the hash are accessible via Smile.key_name, e.g. Smile.start()
     return {
-
         start: start
     };
 

@@ -5,18 +5,18 @@
 	<div class="row">
         <div class="col-md-6">
 		    <div class="panel panel-default">
-                <div class="panel-heading"><strong><a class="post-title" href="#">Post Title</a></strong></div>
-                    <div class="panel-body post-body">
-                            <p>Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque ad nobis propriae quaerendum sea. sum dolor sit amet, id nec conceptam conclusionemque.sum dolor sit amet.</p>
+                <div class="panel-heading"><strong><a class="post-title">Post Title</a></strong></div>
+                    <div class="post-id" id="post-id">3</div>
+                    <div class="panel-body">
+                            <p class="post-body">Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque ad nobis propriae quaerendum sea. sum dolor sit amet, id nec conceptam conclusionemque.sum dolor sit amet.</p>
                     </div>
                 <div class="panel-footer">
-                    <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> <a href="#" id="team-name">Insert Team Name Here</a>
+                    <span class="glyphicon glyphicon-user" id="start"></span> <label id="started">By</label> <a href="#" class="team-name">Insert Team Name Here</a>
                 </div>
             </div>
         </div>
 	</div>
 </div>
-
 
   <head>
     <!-- Bootstrap Required -->
@@ -38,7 +38,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <script type="text/javascript" src="scripts/scripts.js"></script>
-
+    <script type="text/javascript">
+    $(function() {
+    	Cougs_In_Space.start();
+    });
+	</script>
 
     <body>
     <div class="cis">
